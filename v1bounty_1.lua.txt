@@ -114,7 +114,6 @@ local UICorner_Toggle = Instance.new("UICorner")
 MainGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 MainGui.Name = "MainGui"
 MainGui.Parent = game:GetService("CoreGui")
-
 -------------------------------------------------
 -- SHADOW PHÍA SAU MAINFRAME CHO ĐẸP
 -------------------------------------------------
@@ -124,7 +123,7 @@ Shadow.AnchorPoint = Vector2.new(0.5, 0.5)
 Shadow.Position = UDim2.new(0.5, 4, 0.5, 6)
 Shadow.Size = UDim2.new(0, 400, 0, 190)
 Shadow.BackgroundTransparency = 1
-Shadow.Image = "rbxassetid://1316045217" -- generic shadow, thay id nếu muốn
+Shadow.Image = "rbxassetid://1316045217" -- generic shadow
 Shadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
 Shadow.ImageTransparency = 0.35
 Shadow.ScaleType = Enum.ScaleType.Slice
@@ -160,7 +159,8 @@ Stroke.Parent = MainFrame
 -- BACKGROUND IMAGE + GRADIENT TỐI BÊN TRÁI
 -------------------------------------------------
 Background.Image = "rbxassetid://85995292005925"
-Background.BackgroundTransparency = 1
+Background.BackgroundColor3 = Color3.fromRGB(20, 22, 30)
+Background.BackgroundTransparency = 0
 Background.BorderSizePixel = 0
 Background.Size = UDim2.new(1, 0, 1, 0)
 Background.Name = "Background"
@@ -181,20 +181,127 @@ Gradient.Rotation = 0
 Gradient.Parent = Background
 
 -------------------------------------------------
--- NHÂN VẬT BÊN PHẢI
+-- PANEL QUẢNG CÁO BÊN PHẢI (LOGO + DISCORD + SHOP)
 -------------------------------------------------
-Character.Image = "rbxassetid://85995292005925"
-Character.BackgroundTransparency = 1
+Character.Image = "" -- không dùng image trực tiếp nữa
+Character.BackgroundColor3 = Color3.fromRGB(8, 10, 22)
+Character.BackgroundTransparency = 0.08
 Character.BorderSizePixel = 0
-Character.Position = UDim2.new(0.55, 0, -0.05, 0)
-Character.Size = UDim2.new(0, 160, 0, 180)
-Character.Name = "Character"
-Character.ZIndex = 2
+Character.Position = UDim2.new(1, -135, 0.5, -75)
+Character.Size = UDim2.new(0, 120, 0, 150)
+Character.Name = "AdPanel"
+Character.ZIndex = 3
 Character.Parent = MainFrame
 
 local UICorner_Character = Instance.new("UICorner")
-UICorner_Character.CornerRadius = UDim.new(0, 8)
+UICorner_Character.CornerRadius = UDim.new(0, 10)
 UICorner_Character.Parent = Character
+
+local AdStroke = Instance.new("UIStroke")
+AdStroke.Thickness = 1.2
+AdStroke.Color = Color3.fromRGB(255, 255, 255)
+AdStroke.Transparency = 0.35
+AdStroke.Parent = Character
+
+local AdGradient = Instance.new("UIGradient")
+AdGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(40, 60, 160)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(220, 140, 60))
+})
+AdGradient.Rotation = 90
+AdGradient.Transparency = NumberSequence.new({
+    NumberSequenceKeypoint.new(0, 0.15),
+    NumberSequenceKeypoint.new(1, 0.4)
+})
+AdGradient.Parent = Character
+
+-- Logo T trắng phía trên
+local Logo = Instance.new("ImageLabel")
+Logo.Name = "Logo"
+Logo.BackgroundTransparency = 1
+Logo.BorderSizePixel = 0
+Logo.Image = "rbxassetid://YOUR_LOGO_ID" -- <- ĐỔI ID LOGO Ở ĐÂY
+Logo.AnchorPoint = Vector2.new(0.5, 0)
+Logo.Position = UDim2.new(0.5, 0, 0, 8)
+Logo.Size = UDim2.new(0, 54, 0, 54)
+Logo.ZIndex = 4
+Logo.Parent = Character
+
+local LogoCorner = Instance.new("UICorner")
+LogoCorner.CornerRadius = UDim.new(1, 0)
+LogoCorner.Parent = Logo
+
+-------------------------------------------------
+-- BUTTON DISCORD
+-------------------------------------------------
+local DiscordBtn = Instance.new("TextButton")
+DiscordBtn.Name = "DiscordButton"
+DiscordBtn.BackgroundColor3 = Color3.fromRGB(40, 50, 130)
+DiscordBtn.BackgroundTransparency = 0
+DiscordBtn.BorderSizePixel = 0
+DiscordBtn.AnchorPoint = Vector2.new(0.5, 0)
+DiscordBtn.Position = UDim2.new(0.5, 0, 0, 80)
+DiscordBtn.Size = UDim2.new(0.8, 0, 0, 28)
+DiscordBtn.Text = "Discord"
+DiscordBtn.Font = Enum.Font.GothamBold
+DiscordBtn.TextSize = 12
+DiscordBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+DiscordBtn.ZIndex = 4
+DiscordBtn.Parent = Character
+
+local DiscordCorner = Instance.new("UICorner")
+DiscordCorner.CornerRadius = UDim.new(0, 8)
+DiscordCorner.Parent = DiscordBtn
+
+local DiscordStroke = Instance.new("UIStroke")
+DiscordStroke.Thickness = 1
+DiscordStroke.Color = Color3.fromRGB(120, 190, 255)
+DiscordStroke.Transparency = 0.15
+DiscordStroke.Parent = DiscordBtn
+
+local DiscordGrad = Instance.new("UIGradient")
+DiscordGrad.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(90, 150, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(40, 70, 160))
+})
+DiscordGrad.Rotation = 90
+DiscordGrad.Parent = DiscordBtn
+
+-------------------------------------------------
+-- BUTTON GAME SHOP
+-------------------------------------------------
+local ShopBtn = Instance.new("TextButton")
+ShopBtn.Name = "ShopButton"
+ShopBtn.BackgroundColor3 = Color3.fromRGB(140, 70, 20)
+ShopBtn.BackgroundTransparency = 0
+ShopBtn.BorderSizePixel = 0
+ShopBtn.AnchorPoint = Vector2.new(0.5, 0)
+ShopBtn.Position = UDim2.new(0.5, 0, 0, 112)
+ShopBtn.Size = UDim2.new(0.8, 0, 0, 28)
+ShopBtn.Text = "Game Shop"
+ShopBtn.Font = Enum.Font.GothamBold
+ShopBtn.TextSize = 12
+ShopBtn.TextColor3 = Color3.fromRGB(255, 240, 200)
+ShopBtn.ZIndex = 4
+ShopBtn.Parent = Character
+
+local ShopCorner = Instance.new("UICorner")
+ShopCorner.CornerRadius = UDim.new(0, 8)
+ShopCorner.Parent = ShopBtn
+
+local ShopStroke = Instance.new("UIStroke")
+ShopStroke.Thickness = 1
+ShopStroke.Color = Color3.fromRGB(255, 190, 110)
+ShopStroke.Transparency = 0.15
+ShopStroke.Parent = ShopBtn
+
+local ShopGrad = Instance.new("UIGradient")
+ShopGrad.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 190, 120)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(170, 80, 40))
+})
+ShopGrad.Rotation = 90
+ShopGrad.Parent = ShopBtn
 
 -------------------------------------------------
 -- TITLE + ICON
@@ -372,7 +479,7 @@ ServerButton.ZIndex = 4
 ServerButton.Parent = ServerImg
 
 -------------------------------------------------
--- NÚT TOGGLE UI (GIỮ NGUYÊN Ý, CHỈ CHỈNH NHẸ)
+-- NÚT TOGGLE UI
 -------------------------------------------------
 ToggleButton.Parent = MainGui
 ToggleButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
